@@ -1,9 +1,14 @@
+"use strict";
+let goodsArray = [];
+
+let cart = new Cart('cart_wrapper');
+
+cart.render();
+
 class Goods {
     constructor(page) {
         this.url = 'http://localhost:3000/goods';
         this.page = page;
-        this.goodsArray = [];
-        this.cartArray = [];
     }
 
     getGoods(appDiv) {
@@ -11,7 +16,7 @@ class Goods {
             .then(res => res.json())
             .then(res => {
                 res.map((num) => {
-                    this.goodsArray.push(num);
+                    goodsArray.push(num);
                 });
                 this.render(appDiv);
             })
@@ -24,16 +29,19 @@ class Goods {
     render(appDiv) {
         let parentDiv = document.getElementById(appDiv);
 
-        this.goodsArray.map((good) => {
+        goodsArray.map((good) => {
             const goodItem = document.createElement('div'),
                 productId = document.createElement('span'),
                 productName = document.createElement('span'),
                 productColor = document.createElement('span'),
                 productMaterial = document.createElement('span'),
-                productPrice = document.createElement('span');
+                productPrice = document.createElement('span'),
+                button = document.createElement('button'),
+                textButton = document.createTextNode("Add to card");
 
             goodItem.className = 'itemGood';
-            goodItem.dataset.id =  good.id;
+            goodItem.dataset.id = good.id;
+            goodItem.dataset.price = good.price;
 
             productId.className = 'spanId';
             productId.innerHTML = `ID: ${good.id}`;
@@ -55,7 +63,14 @@ class Goods {
             productPrice.innerHTML = `Price: ${good.price}`;
             goodItem.appendChild(productPrice);
 
+            button.setAttribute('id', 'button');
+
+            button.appendChild(textButton);
+            goodItem.appendChild(button);
+
             parentDiv.appendChild(goodItem);
+
+            cart.addGoodInCart(button);
         })
 
     }
