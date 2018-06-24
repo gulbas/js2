@@ -3,10 +3,12 @@ const bodyParser = require('body-parser');
 const session = require('express-session')
 const routes = require('./routes.js');
 const app = express();
+const cors = require('cors');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
+app.use(cors());
 app.use('/static', express.static('static'));
 
 routes(app);
