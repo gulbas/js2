@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"webpack-dev-server --mode development\" \"node app.js\"",
-    "build": "rimraf dist && webpack --mode production && node app.js",
+    "build": "rimraf static && webpack --mode production && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
