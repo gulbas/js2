@@ -59,6 +59,7 @@ export default class Cart {
                     localStorage.setItem('cart', JSON.stringify(this.goodsCart));
                 } else {
                     fetch('/cart/0', {
+                        method: 'POST',
                         body: JSON.stringify({
                             cart: id + 1
                         }),
