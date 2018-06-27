@@ -8,7 +8,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'static'),
-        publicPath: 'static',
+        // publicPath: 'static',
         filename: 'bundle.[chunkhash].js'
     },
     module: {
@@ -44,11 +44,11 @@ module.exports = {
         contentBase: path.join(__dirname, 'static'),
         port: 8080,
         historyApiFallback: true,
-        proxy: [
-            {
-                context: ['/goods', '/login', '/logout'],
+        proxy: {
+            '/api': {
                 target: 'http://localhost:3000',
+                pathRewrite: {'^/api': ''}
             }
-        ]
+        }
     }
 };
