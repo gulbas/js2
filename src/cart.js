@@ -2,7 +2,7 @@
 
 export default class Cart {
     constructor() {
-        this.goodsCart = [];
+        this.goodsCart = JSON.parse(localStorage.getItem('cart')) || [];
         this.state = {
             count: 0,
             price: 0
@@ -48,7 +48,7 @@ export default class Cart {
     cartStorage(id) {
         let result = null;
         console.log(id);
-        fetch('/my-user', {
+        fetch('api/my-user', {
             credentials: 'include'
         })
             .then(res => res.json())
@@ -57,8 +57,9 @@ export default class Cart {
                 console.log(result.auth);
                 if (result.auth === false) {
                     localStorage.setItem('cart', JSON.stringify(this.goodsCart));
+                    console.log('работает');
                 } else {
-                    fetch('/cart/0', {
+                    fetch('api/cart/0', {
                         method: 'POST',
                         body: JSON.stringify({
                             cart: id + 1

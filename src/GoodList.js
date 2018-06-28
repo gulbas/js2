@@ -30,7 +30,7 @@ export default class GoodList {
 
     render() {
         const goodContainer = document.getElementById('app');
-        this.getGoodsList('http://localhost:3000/goods', goodContainer);
+        this.getGoodsList('api/goods', goodContainer);
     }
 }
 
