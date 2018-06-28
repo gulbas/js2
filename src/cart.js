@@ -47,17 +47,16 @@ export default class Cart {
 
     cartStorage(id) {
         let result = null;
-        console.log(id);
-        fetch('api/my-user', {
+        fetch('/api/my-user', {
             credentials: 'include'
         })
             .then(res => res.json())
             .then(data => {
                 result = data;
-                console.log(result.auth);
+                // console.log(result.auth);
                 if (result.auth === false) {
-                    localStorage.setItem('cart', JSON.stringify(this.goodsCart));
-                    console.log('работает');
+                    localStorage.setItem("cart", this.goodsCart);
+                    console.log(this.goodsCart);
                 } else {
                     fetch('api/cart/0', {
                         method: 'POST',
